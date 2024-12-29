@@ -1,0 +1,8 @@
+.form-body {
+    display:flex;
+    flex-direction: column;
+}
+
+.form-attack {
+    margin-bottom: 20px;
+}

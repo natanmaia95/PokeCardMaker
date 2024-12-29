@@ -1,4 +1,5 @@
 import React from 'react'
+import ReactMarkdown from 'react-markdown'
 import './Card.css'
 
 
@@ -30,7 +31,7 @@ function Card({ name, type, stage, hp, abilities, attacks}) {
                             <div className='attack-name'>{attack['name']}</div>
                             <div className='attack-damage'>{attack['damage']}</div>
                         </div>
-                        <div className='attack-desc'>{attack['description']}</div>
+                        <ReactMarkdown className='attack-desc'>{attack['description']}</ReactMarkdown>
                     </div>
                 ))}
 

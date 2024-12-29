@@ -160,3 +160,7 @@
     font-size: var(--text-size-desc);
     font-family: "Gill Sans";
 }
+
+.attack-desc p {
+    margin: 0;
+}
