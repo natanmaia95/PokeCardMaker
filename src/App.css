@@ -1,7 +1,24 @@
 #root {
-  max-width: 1280px;
+  font-family: Arial, sans-serif;
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
 }
 
+.app-container {
+  height: 100vh;
+  display:flex;
+  flex-direction: row;
+}
+
+.form-container {
+  left: 0;
+  width: 50%;
+}
+
+.card-container {
+  right: 0;
+  width: 50%;
+  display: flex;
+  justify-content: center;
+}
