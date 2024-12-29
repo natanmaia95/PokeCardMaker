@@ -2,12 +2,14 @@ import React from "react";
 import './Form.css'
 
 
-function Form({cardData, handleInputChange, handleAttackChange, addAttack, removeAttack}) {
+function Form({cardData, handleInputChange, handleAttackChange, handleImageUpload, addAttack, removeAttack}) {
 
 
 
     return (
         <div className="form-body">
+
+            <h3>Header</h3>
 
             <label>Name: 
                 <input type="text" name="name"
@@ -19,6 +21,19 @@ function Form({cardData, handleInputChange, handleAttackChange, addAttack, remov
             <label>HP: 
                 <input type="number" name="hp"
                 value={cardData.hp}
+                onChange={handleInputChange}
+                />
+            </label>
+
+            <h3>Card Art</h3>
+            <input type="file" accept="image/*" onChange={handleImageUpload}/>
+            <label>Offset: 
+                <input type="number" name="artOffsetX"
+                value={cardData.artOffsetX}
+                onChange={handleInputChange}
+                />
+                <input type="number" name="artOffsetY"
+                value={cardData.artOffsetY}
                 onChange={handleInputChange}
                 />
             </label>

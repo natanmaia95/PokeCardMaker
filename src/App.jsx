@@ -9,6 +9,8 @@ function App() {
     name:"Pikachu",
     type:"lightning",
     hp:60,
+    // art:null,
+    artOffsetX:0,artOffsetY:0,
     abilities: [],
     attacks: [
       { name: "Quick Attack", cost: "N", damage:"10", description:"Your opponent reveals their hand." },
@@ -25,6 +27,14 @@ function App() {
       [name]: value,
     }));
   };
+
+  const handleImageUpload = function(e) {
+    const file = e.target.files[0];
+    if (!file) return;
+    let reader = new FileReader();
+    reader.onload = function() {setCardData({...cardData, art:reader.result})}
+    reader.readAsDataURL(file);
+  }
 
   const handleAttackChange = (index, field, value) => {
     const updatedAttacks = [...cardData.attacks]; //clones the attacks array
@@ -47,7 +57,8 @@ function App() {
         <h1>Hello World!</h1>
         <p>pokemon card maker</p>
         <Form 
-        cardData={cardData} handleInputChange={handleInputChange} handleAttackChange={handleAttackChange}
+        cardData={cardData} handleImageUpload={handleImageUpload}
+        handleInputChange={handleInputChange} handleAttackChange={handleAttackChange}
         addAttack={addAttack} removeAttack={removeAttack}
         />
       </div>

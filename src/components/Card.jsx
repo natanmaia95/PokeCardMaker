@@ -3,7 +3,7 @@ import ReactMarkdown from 'react-markdown'
 import './Card.css'
 
 
-function Card({ name, type, stage, hp, abilities, attacks}) {
+function Card({ name, type, stage, hp, art, artOffsetX, artOffsetY, abilities, attacks}) {
 
     const cardTexturePath = 'src/assets/card_test_blank.png'
 
@@ -21,6 +21,12 @@ function Card({ name, type, stage, hp, abilities, attacks}) {
                 <div className='card-hp'>
                     <div className='card-hp-hp'>HP</div>{hp}
                 </div>
+            </div>
+
+            <div className='card-art'>
+                {/* {art ? <img src={art} alt='Card art' style={{translate: `${artOffsetX}px ${artOffsetY}px`}}/> : <div id='no-art'>No art.</div>} */}
+                {art ? <div className="art-image" style={{backgroundPosition: `${artOffsetX}px ${artOffsetY}px`, backgroundImage: `url(${art})`}}/> : <div id='no-art'>No art.</div>}
+                <div id='shadow'/>
             </div>
 
             <div className='card-body'>
