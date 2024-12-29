@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import html2canvas from 'html2canvas';
 import './App.css'
 import Card from './components/Card';
 import Form from './components/Form';
@@ -34,13 +35,14 @@ function App() {
     let reader = new FileReader();
     reader.onload = function() {setCardData({...cardData, art:reader.result})}
     reader.readAsDataURL(file);
-  }
+  };
 
   const handleAttackChange = (index, field, value) => {
     const updatedAttacks = [...cardData.attacks]; //clones the attacks array
     updatedAttacks[index] = {...updatedAttacks[index], [field]:value}; // {[field]:value} changes a field
     setCardData({...cardData, attacks:updatedAttacks})
-  }
+  };
+
   const addAttack = () => {
       setCardData({...cardData, attacks:[...cardData.attacks, {}]});
   };
@@ -49,7 +51,20 @@ function App() {
     const updatedAttacks = [...cardData.attacks];
     updatedAttacks.splice(index, 1);
     setCardData({...cardData, attacks:updatedAttacks})
-  }
+  };
+
+  const exportAsImage = async function() {
+    const fakeLink = document.createElement("a");
+    fakeLink.style = "display:none;";
+    fakeLink.download = `custom_card_${cardData.name}.png`;
+
+    const canvas = await html2canvas(document.getElementsByClassName("card")[0], {
+      backgroundColor: null,
+    });
+    fakeLink.href = canvas.toDataURL('image/png')
+    fakeLink.click();
+    // document.removeChild(fakeLink);
+  };
 
   return (
     <div className="app-container">
@@ -65,7 +80,9 @@ function App() {
       
       <div className="card-container">
         <Card {...cardData}/>
+        <button className="btn-export" onClick={exportAsImage}>Export</button>
       </div>
+      
     </div>
 
 

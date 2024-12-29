@@ -17,8 +17,19 @@
 }
 
 .card-container {
+  position: fixed;
   right: 0;
   width: 50%;
+  height: 100vh;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  /* justify-content: center; */
+  align-items: center;
+}
+
+.btn-export {
+  /* height: 10%; */
+  width: 200px;
+  position: absolute;
+  bottom: 20%;
 }
