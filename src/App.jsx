@@ -17,8 +17,8 @@ function App() {
     artOffsetX:0,artOffsetY:0,
     abilities: [],
     attacks: [
-      { name: "Quick Attack", cost: "N", damage:"10", description:"Your opponent reveals their hand." },
-      { name: "Thunder Shock", cost: "LL", damage:"20+",
+      { name: "Quick Attack", cost: "C", damage:"10", description:"Your opponent reveals their hand." },
+      { name: "Thunder Shock", cost: "PP", damage:"20+",
         description:"Flip a coin. If heads, this attack deals 20 more damage and the Defending Pokémon is now Paralyzed." },
     ],
   });

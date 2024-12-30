@@ -10,7 +10,7 @@ function Card({ name, type, stage, hp, art, artOffsetX, artOffsetY, abilities, a
     const [cardMouseX, setCardMouseX] = useState(0);
     const [cardMouseY, setCardMouseY] = useState(0);
 
-    const cardTexturePath = 'src/assets/card_test_blank.png'
+    const cardTexturePath = 'assets/blanks/card_test_blank.png'
 
     const cardStyle = {
         backgroundImage: `url(${cardTexturePath})`,
