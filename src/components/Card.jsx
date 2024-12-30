@@ -3,9 +3,9 @@ import { useState } from 'react';
 import ReactMarkdown from 'react-markdown'
 import EnergyCost from './EnergyCost';
 import './Card.css'
+import '../fonts.css'
 
-
-function Card({ name, type, stage, hp, art, artOffsetX, artOffsetY, abilities, attacks}) {
+function Card({ name, type, stage, hp, art, artOffsetX, artOffsetY, abilities, attacks, meta_scale, style}) {
 
     const [cardMouseX, setCardMouseX] = useState(0);
     const [cardMouseY, setCardMouseY] = useState(0);
@@ -15,7 +15,10 @@ function Card({ name, type, stage, hp, art, artOffsetX, artOffsetY, abilities, a
     const cardStyle = {
         backgroundImage: `url(${cardTexturePath})`,
         backgroundSize: 'cover',
-        backgroundPosition: 'center'
+        backgroundPosition: 'center',
+        transform: `perspective(1000px) rotateX(${cardMouseY*50}deg) rotateY(${cardMouseX*-50}deg) scale(${meta_scale})`,
+        // transition: 'transform 0.2s ease-out',
+        // transitionProperty: 'rotateY rotateX'
     };
 
     const mouseMoveHandler = function(event) {
@@ -33,14 +36,14 @@ function Card({ name, type, stage, hp, art, artOffsetX, artOffsetY, abilities, a
     };
 
     return (
-        <div className='card'  style={{...cardStyle, transform: `perspective(1000px) rotateX(${cardMouseY*50}deg) rotateY(${cardMouseX*-50}deg)`}}
+        <div className='card' style={{...cardStyle, ...style}}
         onMouseMove={mouseMoveHandler}
         onMouseLeave={() => {setCardMouseX(0); setCardMouseY(0);}}
         >
             <div className='card-header'>
                 <p className='card-name'>{name}</p>
                 <div className='card-hp'>
-                    <div className='card-hp-hp'>HP</div>{hp}
+                    <div className='card-hp-hp'>HP </div>{hp}
                 </div>
             </div>
 

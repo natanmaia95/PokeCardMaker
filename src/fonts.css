@@ -1,0 +1,76 @@
+@font-face {
+    font-family: "Humanist 522";
+    src: url("assets/fonts/Humanist522.ttf") format("truetype");
+}
+
+
+
+@font-face {
+    font-family: "Futura BT Bold";
+    src: url("assets/fonts/Futura BT Bold.ttf") format("truetype");
+    font-style: normal;
+}
+@font-face {
+    font-family: "Futura BT Bold";
+    src: url("assets/fonts/Futura BT Bold Italic.ttf") format("truetype");
+    font-style: italic;
+}
+
+
+
+@font-face {
+    font-family: "Futura BT";
+    src: url("assets/fonts/Futura BT Medium.ttf") format("truetype");
+    font-style: normal;
+}
+@font-face {
+    font-family: "Futura BT";
+    src: url("assets/fonts/Futura BT Medium Italic.ttf") format("truetype");
+    font-style: italic;
+}
+
+
+
+@font-face {
+    font-family: "Gill Sans";
+    
+    font-weight: normal;
+    font-style: normal;
+    src: url("assets/fonts/GillSansStd.otf") format("opentype");
+}
+@font-face {
+    font-family: "Gill Sans";
+    
+    font-weight: normal;
+    font-style: italic;
+    src: url("assets/fonts/GillSansStd-Italic.otf") format("opentype");
+}
+@font-face {
+    font-family: "Gill Sans";
+    
+    font-weight: bold;
+    font-style: normal;
+    src: url("assets/fonts/GillSansStd-Bold.otf") format("opentype");
+}
+@font-face {
+    font-family: "Gill Sans";
+    
+    font-weight: bold;
+    font-style: italic;
+    src: url("assets/fonts/GillSansStd-BoldItalic.otf") format("opentype");
+}
+
+
+
+@font-face {
+    font-family: "Gill Sans Condensed";
+    
+    font-weight: normal;
+    src: url("assets/fonts/GillSansStd-Condensed.otf") format("opentype");
+}
+@font-face {
+    font-family: "Gill Sans Condensed";
+    
+    font-weight: bold;
+    src: url("assets/fonts/GillSansStd-BoldCondensed.otf") format("opentype");
+}
