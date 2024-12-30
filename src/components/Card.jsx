@@ -1,6 +1,7 @@
 import React from 'react'
 import { useState } from 'react';
 import ReactMarkdown from 'react-markdown'
+import EnergyCost from './EnergyCost';
 import './Card.css'
 
 
@@ -59,7 +60,9 @@ function Card({ name, type, stage, hp, art, artOffsetX, artOffsetY, abilities, a
                 {attacks.map((attack, index) => (
                     <div className='attack-container' key={index}>
                         <div className='attack-header'>
-                            <div className='attack-cost'>{attack['cost']}</div>
+                            <div className='attack-cost'>
+                                <EnergyCost cost={attack['cost']}/>
+                            </div>
                             <div className='attack-name'>{attack['name']}</div>
                             <div className='attack-damage'>{attack['damage']}</div>
                         </div>
