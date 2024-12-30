@@ -1,17 +1,17 @@
 import React from "react";
 
 const energyIcons = {
-    'G' : 'src/assets/energy/grass.png',
-    'R' : 'src/assets/energy/fire.png',
-    'W' : 'src/assets/energy/water.png',
-    'L' : 'src/assets/energy/lightning.png',
-    'P' : 'src/assets/energy/psychic.png',
-    'F' : 'src/assets/energy/fighting.png',
-    'D' : 'src/assets/energy/darkness.png',
-    'M' : 'src/assets/energy/metal.png',
-    'C' : 'src/assets/energy/colorless.png',
-    'N' : 'src/assets/energy/dragon.png',
-    'Y' : 'src/assets/energy/fairy.png'
+    'G' : 'assets/energy/grass.png',
+    'R' : 'assets/energy/fire.png',
+    'W' : 'assets/energy/water.png',
+    'L' : 'assets/energy/lightning.png',
+    'P' : 'assets/energy/psychic.png',
+    'F' : 'assets/energy/fighting.png',
+    'D' : 'assets/energy/darkness.png',
+    'M' : 'assets/energy/metal.png',
+    'C' : 'assets/energy/colorless.png',
+    'N' : 'assets/energy/dragon.png',
+    'Y' : 'assets/energy/fairy.png'
 }
 
 const EnergyCost = function({cost='', height="40px"}) {
