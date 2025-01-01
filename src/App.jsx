@@ -85,11 +85,13 @@ function App() {
         handleInputChange={handleInputChange} handleAttackChange={handleAttackChange}
         addAttack={addAttack} removeAttack={removeAttack}
         />
+
+        <button className="btn-export" onClick={exportAsImage}>Export</button>
       </div>
       
       <div className="card-container">
         <Card {...cardData} meta_scale={cardScale} style={{top:'-30%'}}/>
-        <button className="btn-export" onClick={exportAsImage}>Export</button>
+        
       </div>
       
     </div>
