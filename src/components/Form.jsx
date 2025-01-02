@@ -1,7 +1,7 @@
 import React from "react";
 import './Form.css'
 import Collapsible from "./Collapsible";
-
+import { cardElementTypes, cardStageTypes } from "../dicts";
 
 function AttackForm({attack, attackIndex, handleAttackChange, removeAttack}) {
 
@@ -46,10 +46,26 @@ function Form({cardData, handleInputChange, handleAttackChange, handleImageUploa
     return (
         <div className="form-body">
 
-            <Collapsible header="Card Basics"/>
+            <Collapsible header="Card Basics" contents={
+                <div className='form-basics'>
+                    <label>Pokémon Type
+                        <select value={cardData.element} name="element" onChange={handleInputChange}>
+                            {cardElementTypes.map((elem) => (
+                                <option key={elem} value={elem}>{elem}</option>
+                            ))}
+                        </select>
+                    </label>
+                    <label>Evolution Stage
+                        <select value={cardData.stage} name="stage" onChange={handleInputChange}>
+                            {cardStageTypes.map((stage) => (
+                                <option key={stage} value={stage}>{stage}</option>
+                            ))}
+                        </select>
+                    </label>
+                </div>
+            }/>
 
-            <Collapsible header="Header"
-            contents={
+            <Collapsible header="Header" contents={
                 <div className='form-card-header'>
                     <label>Name: 
                         <input type="text" name="name"
@@ -57,32 +73,48 @@ function Form({cardData, handleInputChange, handleAttackChange, handleImageUploa
                         onChange={handleInputChange}
                         />
                     </label>
-                    <br/>
+                    <label>Subname 
+                        <input type="text" name="subname"
+                        value={cardData.subname}
+                        onChange={handleInputChange}
+                        />
+                        <button>toggle prefix/subfix</button>
+                    </label>
                     <label>HP: 
                         <input type="number" name="hp"
                         value={cardData.hp}
                         onChange={handleInputChange}
                         />
                     </label>
+                    {cardData.stage != "basic" 
+                    ?   <label>Evolves from: 
+                            <input type="text" name="evolveFrom"
+                            value={cardData.evolveFrom}
+                            onChange={handleInputChange}
+                            />
+                        </label>
+                    :   null}
                 </div>
             }/>
 
-            <Collapsible header="Card Art"
-            contents={
+            <Collapsible header="Card Art" contents={
                 <div className="form-art">
                     <div>Main Art
                         <input type="file" accept="image/*" onChange={handleImageUpload}/>
                     </div>
                     
                     <div>Main Art Offset: 
-                        <input type="number" name="artOffsetX"
-                        value={cardData.artOffsetX}
+                        <input 
+                        type="range" min="-500" max="500"  
+                        value={cardData.artOffsetX} name="artOffsetX"
                         onChange={handleInputChange}
                         />
-                        <input type="number" name="artOffsetY"
-                        value={cardData.artOffsetY}
-                        onChange={handleInputChange}
+                        <input 
+                        type="range" min="-500" max="500" 
+                        value={cardData.artOffsetY} name="artOffsetY"
+                        onChange={handleInputChange} 
                         />
+                        <button onClick={(e) => {cardData.artOffsetX = 0; cardData.artOffsetY = 0; handleInputChange(e)}}>R</button>
                     </div>
 
                     <div>Evolution
@@ -92,8 +124,7 @@ function Form({cardData, handleInputChange, handleAttackChange, handleImageUploa
 
             }/>
 
-            <Collapsible header="Attacks" 
-            contents={
+            <Collapsible header="Attacks" contents={
                 <div>
                     {cardData.attacks.map((attack, index) => (
                         <AttackForm key={index} attack={attack} attackIndex={index} removeAttack={removeAttack} handleAttackChange={handleAttackChange} />

@@ -4,21 +4,24 @@ import ReactMarkdown from 'react-markdown'
 import EnergyCost from './EnergyCost';
 import './Card.css'
 import '../fonts.css'
+import { getImageBlankURL } from '../dicts';
 
-function Card({ name, type, stage, hp, art, artOffsetX, artOffsetY, abilities, attacks, meta_scale, style}) {
+function Card({ name, element, stage, blankUrl, hp, evolveFrom, art, artOffsetX, artOffsetY, abilities, attacks, meta_scale, style}) {
 
     const [cardMouseX, setCardMouseX] = useState(0);
     const [cardMouseY, setCardMouseY] = useState(0);
 
-    const cardTexturePath = 'assets/blanks/card_test_blank.png'
+    // const cardTexturePath = 'assets/blanks/card_test_blank.png'
+    // const cardTexturePath = getImageBlankURL(element, stage);
+    // console.log("texture url:", cardTexturePath);
+    // blankUrl = 'assets/blanks/card_test_blank.png'
 
     const cardStyle = {
-        backgroundImage: `url(${cardTexturePath})`,
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         transform: `perspective(1000px) rotateX(${cardMouseY*50}deg) rotateY(${cardMouseX*-50}deg) scale(${meta_scale})`,
-        // transition: 'transform 0.2s ease-out',
-        // transitionProperty: 'rotateY rotateX'
+        transition: 'transform 0.4s ease-out',
+        // transitionProperty: 'transform'
     };
 
     const mouseMoveHandler = function(event) {
@@ -40,11 +43,15 @@ function Card({ name, type, stage, hp, art, artOffsetX, artOffsetY, abilities, a
         onMouseMove={mouseMoveHandler}
         onMouseLeave={() => {setCardMouseX(0); setCardMouseY(0);}}
         >
+            <img className='card-img-blank' src={blankUrl}></img>
+
             <div className='card-header'>
                 <p className='card-name'>{name}</p>
                 <div className='card-hp'>
                     <div className='card-hp-hp'>HP </div>{hp}
                 </div>
+                {stage == "basic" ? null : <p className='card-evoname'>Evolves from {evolveFrom}</p>}
+                
             </div>
 
             <div className='card-art'>
@@ -56,7 +63,7 @@ function Card({ name, type, stage, hp, art, artOffsetX, artOffsetY, abilities, a
                     : <div id='no-art'>No art.</div>
                 }
                 {/* <div id='shadow'/> */}
-                {/* TODO: fix shadow bug */}
+                {/* TODO: fix shadow bug using an image */}
             </div>
 
             <div className='card-body'>

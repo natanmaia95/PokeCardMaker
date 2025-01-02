@@ -3,6 +3,7 @@ import html2canvas from 'html2canvas';
 import './App.css'
 import Card from './components/Card';
 import Form from './components/Form';
+import { getImageBlankURL } from './dicts';
 
 function App() {
 
@@ -11,7 +12,9 @@ function App() {
 
   const [cardData, setCardData] = useState({
     name:"Pikachu",
-    type:"lightning",
+    element:"lightning",
+    stage:"basic",
+    blankUrl: getImageBlankURL("lightning", "basic"),
     hp:60,
     // art:null,
     artOffsetX:0,artOffsetY:0,
@@ -26,10 +29,15 @@ function App() {
 
   const handleInputChange = function(e) {
     const { name, value } = e.target;
-    setCardData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
+    let prevData = {...cardData, [name]:value};
+
+    if (name == "stage" || name == "element") {
+      const newImageUrl = getImageBlankURL(prevData.element, prevData.stage);
+      console.log(newImageUrl);
+      prevData["blankUrl"] = newImageUrl;
+    }
+    
+    setCardData(prevData);
   };
 
   const handleImageUpload = function(e) {
@@ -57,8 +65,8 @@ function App() {
   };
 
   const exportAsImage = async function() {
-    setCardScale(1.0);
-    await new Promise((resolve) => setTimeout(resolve, 100)); // Small delay for the scale to take effect
+    // setCardScale(1.0);
+    // await new Promise((resolve) => setTimeout(resolve, 100)); // Small delay for the scale to take effect
 
     const fakeLink = document.createElement("a");
     fakeLink.style = "display:none;";
@@ -67,13 +75,17 @@ function App() {
     const cardDiv = document.getElementsByClassName("card")[0];
 
     const canvas = await html2canvas(cardDiv, {
-      backgroundColor: null, scale: 1,
+      backgroundColor: null, 
+      scale: 1, 
+      useCORS: true,
+      onclone: (clonedDoc) => {
+        clonedDoc.getElementsByClassName("card")[0].style.transform = "rotateX(0) rotateY(0) scale(1)";
+      }
     });
     fakeLink.href = canvas.toDataURL('image/png')
     fakeLink.click();
-    // document.removeChild(fakeLink);
-    setCardScale(defaultViewScale);
   };
+
 
   return (
     <div className="app-container">
