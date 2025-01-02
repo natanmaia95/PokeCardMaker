@@ -22,6 +22,21 @@ export const abbrevToElementType = {
     'Y' : 'fairy'
 }
 
+export const elementTypeToAbbrev = {
+    'empty': 'E',
+    'grass': 'G',
+    'fire': 'R',
+    'water': 'W',
+    'lightning': 'L',
+    'psychic': 'P',
+    'fighting': 'F',
+    'dark': 'D',
+    'metal': 'M',
+    'colorless': 'C',
+    'dragon': 'N',
+    'fairy': 'Y'
+}
+
 export const getImageBlankURL = function(elem, stage, options={}) {
     let url = `https://pokecardmaker.net/assets/cards/baseSets/scarletAndViolet/supertypes/pokemon/types/${elem}/subtypes/${stage}`
 

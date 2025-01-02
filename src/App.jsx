@@ -24,6 +24,9 @@ function App() {
       { name: "Thunder Shock", cost: "PP", damage:"20+",
         description:"Flip a coin. If heads, this attack deals 20 more damage and the Defending Pokémon is now Paralyzed." },
     ],
+    retreatCost: 1,
+    weakness: 'fighting',
+    resistance: 'empty',
   });
 
 

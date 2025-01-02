@@ -4,9 +4,9 @@ import ReactMarkdown from 'react-markdown'
 import EnergyCost from './EnergyCost';
 import './Card.css'
 import '../fonts.css'
-import { getImageBlankURL } from '../dicts';
+import { elementTypeToAbbrev, getImageBlankURL } from '../dicts';
 
-function Card({ name, element, stage, blankUrl, hp, evolveFrom, art, artOffsetX, artOffsetY, abilities, attacks, meta_scale, style}) {
+function Card({ name, element, stage, blankUrl, hp, evolveFrom, art, artOffsetX, artOffsetY, abilities, attacks, weakness, resistance, retreatCost, meta_scale, style}) {
 
     const [cardMouseX, setCardMouseX] = useState(0);
     const [cardMouseY, setCardMouseY] = useState(0);
@@ -80,6 +80,20 @@ function Card({ name, element, stage, blankUrl, hp, evolveFrom, art, artOffsetX,
                     </div>
                 ))}
 
+            </div>
+
+            <div className='card-prefooter'>
+                <div className='card-weakness'>
+                    <EnergyCost height='25px' cost={elementTypeToAbbrev[weakness]} showEmpty={false}/>
+                    <div className='card-prefooter-text'>{weakness != 'empty' ? "x 2" : ""}</div>
+                </div>
+                <div className='card-resistance'>
+                    <EnergyCost height='25px' cost={elementTypeToAbbrev[resistance]} showEmpty={false}/>
+                    <div className='card-prefooter-text'>{resistance != 'empty' ? "- 30" : ""}</div>
+                </div>
+                <div className='card-retreat'>
+                    <EnergyCost height='25px' cost={'C'.repeat(retreatCost)}/>
+                </div>
             </div>
         </div>
     );

@@ -133,9 +133,31 @@ function Form({cardData, handleInputChange, handleAttackChange, handleImageUploa
                 </div>
             }/>
 
-            <Collapsible header="Footer"
-            contents={
-                <div></div>
+            <Collapsible header="Footer" contents={
+                <div>
+                    <label>Weakness
+                        <select value={cardData.weakness} name="weakness" onChange={handleInputChange}>
+                            {[...cardElementTypes, 'empty'].map((elem) => (
+                                <option key={elem} value={elem}>{elem}</option>
+                            ))}
+                        </select>
+                    </label>
+
+                    <label>Resistance
+                        <select value={cardData.resistance} name="resistance" onChange={handleInputChange}>
+                            {[...cardElementTypes, 'empty'].map((elem) => (
+                                <option key={elem} value={elem}>{elem}</option>
+                            ))}
+                        </select>
+                    </label>
+
+                    <label>Retreat Cost: 
+                        <input type="number" name="retreatCost" min="0" max="5"
+                        value={cardData.retreatCost}
+                        onChange={handleInputChange}
+                        />
+                    </label>
+                </div>
             }/>
             
             

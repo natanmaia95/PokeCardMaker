@@ -15,11 +15,12 @@ const energyIcons = {
     'Y' : 'assets/energy_sv/fairy.png'
 }
 
-const EnergyCost = function({cost='', height="40px"}) {
+const EnergyCost = function({cost='', height="40px", showEmpty=true}) {
     return (
-    <div className='energy-cost'>
+    <div className='energy-cost' style={{height: height}}>
     {
         cost.split('').map((char, index) => {
+            if (char == 'E' && !showEmpty) return null;
             const icon = energyIcons[char];
             if (icon == null) return null;
             return (
