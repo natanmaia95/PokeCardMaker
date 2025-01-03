@@ -6,7 +6,7 @@ import './Card.css'
 import '../fonts.css'
 import { elementTypeToAbbrev, getImageBlankURL } from '../dicts';
 
-function Card({ name, element, stage, blankUrl, hp, evolveFrom, art, artOffsetX, artOffsetY, abilities, attacks, weakness, resistance, retreatCost, meta_scale, style}) {
+function Card({ name, element, stage, blankUrl, hp, evolveFrom, evoArt, art, evolveArt, artOffsetX, artOffsetY, abilities, attacks, weakness, resistance, retreatCost, meta_scale, style}) {
 
     const [cardMouseX, setCardMouseX] = useState(0);
     const [cardMouseY, setCardMouseY] = useState(0);
@@ -22,6 +22,7 @@ function Card({ name, element, stage, blankUrl, hp, evolveFrom, art, artOffsetX,
         transform: `perspective(1000px) rotateX(${cardMouseY*50}deg) rotateY(${cardMouseX*-50}deg) scale(${meta_scale})`,
         transition: 'transform 0.4s ease-out',
         // transitionProperty: 'transform'
+        color: element == 'dark' ? "var(--text-color-white)" : "var(--text-color-black)"
     };
 
     const mouseMoveHandler = function(event) {
@@ -43,7 +44,7 @@ function Card({ name, element, stage, blankUrl, hp, evolveFrom, art, artOffsetX,
         onMouseMove={mouseMoveHandler}
         onMouseLeave={() => {setCardMouseX(0); setCardMouseY(0);}}
         >
-            <img className='card-img-blank' src={blankUrl}></img>
+            <img draggable="false" className='card-img-blank' src={blankUrl}></img>
 
             <div className='card-header'>
                 <p className='card-name'>{name}</p>
@@ -52,6 +53,8 @@ function Card({ name, element, stage, blankUrl, hp, evolveFrom, art, artOffsetX,
                 </div>
                 {stage == "basic" ? null : <p className='card-evoname'>Evolves from {evolveFrom}</p>}
                 
+
+                <img className='evolveArt-image' src={evoArt}/>
             </div>
 
             <div className='card-art'>

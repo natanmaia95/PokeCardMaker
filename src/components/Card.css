@@ -43,7 +43,7 @@
     /* transition-property: rotateY, rotateX; */
     /* transition-duration: 0.2; */
 
-    color: var(--text-color-black);
+    /* color: var(--text-color-black); */
 }
 
 /* .card:hover {
@@ -91,6 +91,7 @@
     font-family: "Gill Sans";
     /* font-size: 1em; Relative to the .card font size */
     font-size: 18px;
+    color: var(--text-color-black);
 }
 
 .card-hp {
@@ -118,6 +119,16 @@
     font-weight: bold;
     font-size: 20px;
     letter-spacing: normal;
+}
+
+.evolveArt-image {
+    width: 80px; height: 80px;
+
+    position: absolute;
+    top: 85px;
+    left: 30px;
+
+    object-fit: contain;
 }
 
 .card-art {

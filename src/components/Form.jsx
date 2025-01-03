@@ -118,7 +118,7 @@ function Form({cardData, handleInputChange, handleAttackChange, handleImageUploa
                     </div>
 
                     <div>Evolution
-                        <input type="file" accept="image/*" onChange={handleImageUpload}/>
+                        <input type="file" accept="image/*" onChange={(e) => handleImageUpload(e, {isEvoArt:true})}/>
                     </div>
                 </div>
 

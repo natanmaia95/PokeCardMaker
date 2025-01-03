@@ -16,7 +16,9 @@ function App() {
     stage:"basic",
     blankUrl: getImageBlankURL("lightning", "basic"),
     hp:60,
+    evolveFrom: "",
     // art:null,
+    // evoArt:null
     artOffsetX:0,artOffsetY:0,
     abilities: [],
     attacks: [
@@ -43,11 +45,13 @@ function App() {
     setCardData(prevData);
   };
 
-  const handleImageUpload = function(e) {
+  const handleImageUpload = function(e, options={}) {
     const file = e.target.files[0];
     if (!file) return;
     let reader = new FileReader();
-    reader.onload = function() {setCardData({...cardData, art:reader.result})}
+    let slot = "art";
+    if (options.isEvoArt) slot = "evoArt";
+    reader.onload = function() {setCardData({...cardData, [slot]:reader.result})}
     reader.readAsDataURL(file);
   };
 
