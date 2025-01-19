@@ -41,13 +41,13 @@ function AttackForm({attack, attackIndex, handleAttackChange, removeAttack}) {
 
 
 
-function Form({cardData, handleInputChange, handleAttackChange, handleImageUpload, addAttack, removeAttack}) {
+function Form({cardData, handleInputChange, handleSetValue, handleAttackChange, handleImageUpload, addAttack, removeAttack}) {
 
     return (
         <div className="form-body">
 
             <Collapsible header="Card Basics" contents={
-                <div className='form-basics'>
+                <fieldset className='form-basics'>
                     <label>Pokémon Type
                         <select value={cardData.element} name="element" onChange={handleInputChange}>
                             {cardElementTypes.map((elem) => (
@@ -62,11 +62,11 @@ function Form({cardData, handleInputChange, handleAttackChange, handleImageUploa
                             ))}
                         </select>
                     </label>
-                </div>
+                </fieldset>
             }/>
 
             <Collapsible header="Header" contents={
-                <div className='form-card-header'>
+                <fieldset className='form-card-header'>
                     <label>Name: 
                         <input type="text" name="name"
                         value={cardData.name}
@@ -78,7 +78,9 @@ function Form({cardData, handleInputChange, handleAttackChange, handleImageUploa
                         value={cardData.subname}
                         onChange={handleInputChange}
                         />
-                        <button>toggle prefix/subfix</button>
+                        <button type="button"
+                        onClick={() => {handleSetValue("isSubnamePrefix",!cardData.isSubnamePrefix)}}
+                        >toggle prefix/subfix</button>
                     </label>
                     <label>HP: 
                         <input type="number" name="hp"
@@ -94,47 +96,51 @@ function Form({cardData, handleInputChange, handleAttackChange, handleImageUploa
                             />
                         </label>
                     :   null}
-                </div>
+                </fieldset>
             }/>
 
             <Collapsible header="Card Art" contents={
-                <div className="form-art">
-                    <div>Main Art
+                <fieldset className="form-art">
+                    <label>Main Art
                         <input type="file" accept="image/*" onChange={handleImageUpload}/>
-                    </div>
+                    </label>
                     
-                    <div>Main Art Offset: 
-                        <input 
-                        type="range" min="-500" max="500"  
-                        value={cardData.artOffsetX} name="artOffsetX"
-                        onChange={handleInputChange}
-                        />
-                        <input 
-                        type="range" min="-500" max="500" 
-                        value={cardData.artOffsetY} name="artOffsetY"
-                        onChange={handleInputChange} 
-                        />
-                        <button onClick={(e) => {cardData.artOffsetX = 0; cardData.artOffsetY = 0; handleInputChange(e)}}>R</button>
-                    </div>
+                    <label>Main Art Offset: 
+                        <div>X
+                            <input 
+                            type="range" min="-500" max="500"  
+                            value={cardData.artOffsetX} name="artOffsetX"
+                            onChange={handleInputChange}
+                            />
+                        </div>
+                        <div>Y
+                            <input 
+                            type="range" min="-500" max="500" 
+                            value={cardData.artOffsetY} name="artOffsetY"
+                            onChange={handleInputChange} 
+                            />
+                        </div>
+                        <button onClick={(e) => {cardData.artOffsetX = 0; cardData.artOffsetY = 0; handleInputChange(e)}}>Reset</button>
+                    </label>
 
-                    <div>Evolution
+                    <label>Evolution
                         <input type="file" accept="image/*" onChange={(e) => handleImageUpload(e, {isEvoArt:true})}/>
-                    </div>
-                </div>
+                    </label>
+                </fieldset>
 
             }/>
 
             <Collapsible header="Attacks" contents={
-                <div>
+                <fieldset>
                     {cardData.attacks.map((attack, index) => (
                         <AttackForm key={index} attack={attack} attackIndex={index} removeAttack={removeAttack} handleAttackChange={handleAttackChange} />
                     ))}
                     <button onClick={addAttack}>Add Attack</button>
-                </div>
+                </fieldset>
             }/>
 
-            <Collapsible header="Footer" contents={
-                <div>
+            <Collapsible header="Weakness" contents={
+                <fieldset>
                     <label>Weakness
                         <select value={cardData.weakness} name="weakness" onChange={handleInputChange}>
                             {[...cardElementTypes, 'empty'].map((elem) => (
@@ -157,7 +163,58 @@ function Form({cardData, handleInputChange, handleAttackChange, handleImageUploa
                         onChange={handleInputChange}
                         />
                     </label>
-                </div>
+                </fieldset>
+            }/>
+
+            <Collapsible header="Footer" contents={
+                <fieldset>
+                    <label>Lore
+                        <textarea name="dexDescription" type="text"
+                            placeholder="The pokedéx entry goes here."
+                            value={cardData.dexDescription}
+                            onChange={handleInputChange}
+                        />
+                    </label>
+
+                    <label>Artist
+                        <input name="artist" type="text"
+                            placeholder="???"
+                            value={cardData.artist}
+                            onChange={handleInputChange}
+                        />
+                    </label>
+
+                    <label>Regulation
+                        <input name="reg" type="text"
+                            placeholder="A"
+                            value={cardData.reg}
+                            onChange={handleInputChange}
+                        />
+                    </label>
+
+                    <label>Set Name
+                        <input name="set" type="text"
+                            placeholder="SV1"
+                            value={cardData.set}
+                            onChange={handleInputChange}
+                        />
+                    </label>
+
+                    <label>Set Number
+                        <input name="collectorNumber" type="number"
+                            placeholder="1"
+                            value={cardData.collectorNumber}
+                            onChange={handleInputChange}
+                        />
+                        <input name="collectorNumberMax" type="number"
+                            placeholder="995"
+                            value={cardData.collectorNumberMax}
+                            onChange={handleInputChange}
+                        />
+                    </label>
+
+
+                </fieldset>
             }/>
             
             

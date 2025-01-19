@@ -12,6 +12,7 @@ function App() {
 
   const [cardData, setCardData] = useState({
     name:"Pikachu",
+    subname:"", isSubnamePrefix:true,
     element:"lightning",
     stage:"basic",
     blankUrl: getImageBlankURL("lightning", "basic"),
@@ -22,13 +23,16 @@ function App() {
     artOffsetX:0,artOffsetY:0,
     abilities: [],
     attacks: [
-      { name: "Quick Attack", cost: "C", damage:"10", description:"Your opponent reveals their hand." },
+      { name: "Quick Attack", cost: "C", damage:"10" },
       { name: "Thunder Shock", cost: "PP", damage:"20+",
         description:"Flip a coin. If heads, this attack deals 20 more damage and the Defending Pokémon is now Paralyzed." },
     ],
     retreatCost: 1,
     weakness: 'fighting',
     resistance: 'empty',
+
+    reg: 'A', set: 'SV1',
+    collectorNumber: 1, collectorNumberMax:995,
   });
 
 
@@ -44,6 +48,10 @@ function App() {
     
     setCardData(prevData);
   };
+
+  const handleSetValue = function(name, value) {
+    setCardData({...cardData, [name]:value});
+  }
 
   const handleImageUpload = function(e, options={}) {
     const file = e.target.files[0];
@@ -100,7 +108,7 @@ function App() {
         <h1>Hello World!</h1>
         <p>pokemon card maker</p>
         <Form 
-        cardData={cardData} handleImageUpload={handleImageUpload}
+        cardData={cardData} handleImageUpload={handleImageUpload} handleSetValue={handleSetValue}
         handleInputChange={handleInputChange} handleAttackChange={handleAttackChange}
         addAttack={addAttack} removeAttack={removeAttack}
         />

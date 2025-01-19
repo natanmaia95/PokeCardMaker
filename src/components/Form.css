@@ -3,6 +3,18 @@
     flex-direction: column;
 }
 
+fieldset {
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 32px;
+}
+
+label {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+}
+
 
 
 .collapsible-button {
@@ -15,6 +27,7 @@
     text-align: left;
     outline: none;
     font-size: 15px;
+
 }
 
 .collapsible-button:hover {

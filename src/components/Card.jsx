@@ -6,7 +6,9 @@ import './Card.css'
 import '../fonts.css'
 import { elementTypeToAbbrev, getImageBlankURL } from '../dicts';
 
-function Card({ name, element, stage, blankUrl, hp, evolveFrom, evoArt, art, evolveArt, artOffsetX, artOffsetY, abilities, attacks, weakness, resistance, retreatCost, meta_scale, style}) {
+function Card({ style, name, subname, isSubnamePrefix, element, stage, blankUrl, hp, evolveFrom, evoArt, art, evolveArt, artOffsetX, artOffsetY, 
+    abilities, attacks, weakness, resistance, retreatCost, dexDescription, artist, collectorNumber, collectorNumberMax, reg, set,
+    meta_scale}) {
 
     const [cardMouseX, setCardMouseX] = useState(0);
     const [cardMouseY, setCardMouseY] = useState(0);
@@ -47,14 +49,20 @@ function Card({ name, element, stage, blankUrl, hp, evolveFrom, evoArt, art, evo
             <img draggable="false" className='card-img-blank' src={blankUrl}></img>
 
             <div className='card-header'>
-                <p className='card-name'>{name}</p>
+                
+                <div className='card-name'>
+                {!(subname != undefined && isSubnamePrefix == true) ? null : <p className='card-name-subname'>{subname} </p>}
+                {name}
+                {!(subname != undefined && isSubnamePrefix == false) ? null : <p className='card-name-subname'> {subname}</p>}
+                </div>
+                
+                
                 <div className='card-hp'>
                     <div className='card-hp-hp'>HP </div>{hp}
                 </div>
                 {stage == "basic" ? null : <p className='card-evoname'>Evolves from {evolveFrom}</p>}
+                {stage == "basic" ? null : <img className='evolveArt-image' src={evoArt}/>}
                 
-
-                <img className='evolveArt-image' src={evoArt}/>
             </div>
 
             <div className='card-art'>
@@ -96,6 +104,27 @@ function Card({ name, element, stage, blankUrl, hp, evolveFrom, evoArt, art, evo
                 </div>
                 <div className='card-retreat'>
                     <EnergyCost height='25px' cost={'C'.repeat(retreatCost)}/>
+                </div>
+            </div>
+
+            <div className='card-footer'>
+                <div className='card-dex-description'>
+                    {dexDescription}
+                </div>
+
+                <div className='card-footer-artist'>
+                    Illus. {artist}
+                </div>
+
+                <div className='card-footer-collectornum'>
+                    {collectorNumber}{collectorNumberMax ? "/"+collectorNumberMax : ""}
+                </div>
+
+                <div className='card-footer-reg'>{reg}</div>
+                <div className='card-footer-set'>
+                    <div className='card-footer-set-inner'>
+                        {set ? set : "?"}
+                    </div>
                 </div>
             </div>
         </div>
