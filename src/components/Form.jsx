@@ -3,6 +3,7 @@ import './Form.css'
 import Collapsible from "./Collapsible";
 import { cardElementTypes, cardStageTypes, elementTypeToAbbrev } from "../dicts";
 import EnergyCost from "./EnergyCost";
+import InfoIcon from "./InfoIcon";
 
 function capitalize(string) {
     return string[0].toUpperCase() + string.slice(1);
@@ -11,20 +12,27 @@ function capitalize(string) {
 function AttackForm({attack, attackIndex, handleAttackChange, removeAttack}) {
 
     return (<div className='form-attack'>
-        <div className='form-attack-header'>
-            <label>Name: 
-                <input type="text" name="name"
-                value={attack.name}
-                onChange={(e) =>handleAttackChange(attackIndex, 'name', e.target.value)}
-                />
-            </label>
-            <label>Cost: 
+        <div className='form-group'>
+            <label>Name</label>
+            <input type="text" name="name"
+            value={attack.name}
+            onChange={(e) =>handleAttackChange(attackIndex, 'name', e.target.value)}
+            />
+        </div>
+            
+        <div style={{display:"flex", justifyContent:"space-between"}}>
+            <label>
+                <div style={{display:"flex"}}>
+                    Cost:
+                    <InfoIcon helpText="The energy icons are R G W L F P C D M N Y, as well as E for empty."/>
+                </div>
                 <input type="text" name="cost" className='attack-input-cost'
                 value={attack.cost}
                 onChange={(e) =>handleAttackChange(attackIndex, 'cost', e.target.value)}
                 />
             </label>
-            <label>Damage: 
+            <div style={{width:"30%"}}/>
+            <label><p>Damage:</p> 
                 <input type="text" name="damage" className='attack-input-damage'
                 value={attack.damage}
                 onChange={(e) =>handleAttackChange(attackIndex, 'damage', e.target.value)}
@@ -32,15 +40,15 @@ function AttackForm({attack, attackIndex, handleAttackChange, removeAttack}) {
             </label>
         </div>
 
-        <div className='form-attack-body'>
+        <div className='form-group'>
+            {/* <label>Description</label> */}
             <textarea type="text" name="description" className='attack-area-desc'
             value={attack.description} placeholder="Add a description"
             onChange={(e) =>handleAttackChange(attackIndex, 'description', e.target.value)}
             />
-
-            <button onClick={(e) => removeAttack(attackIndex)}>D</button>
         </div>
 
+        <button onClick={(e) => removeAttack(attackIndex)}>Delete</button>
     </div>);
 }
 
@@ -85,7 +93,9 @@ function Form({cardData, handleInputChange, handleSetValue, handleAttackChange, 
                             />
                     </div>
                     <div className='form-group'>
-                        <label>Subname</label>
+                        <label>Subname 
+                            <InfoIcon helpText='Use this to make composite names like "Hisuian Arcanine" or "Hop&quot;s Snorlax".'/>
+                        </label>
                         <input type="text" name="subname"
                             value={cardData.subname}
                             onChange={handleInputChange}
@@ -120,16 +130,18 @@ function Form({cardData, handleInputChange, handleSetValue, handleAttackChange, 
                     </div>
                     <div className='form-group'>
                         <label>Main Art Offset (X, Y)</label>
-                        <input 
-                        type="range" min="-500" max="500"  
-                        value={cardData.artOffsetX} name="artOffsetX"
-                        onChange={handleInputChange}
-                        />
-                        <input 
-                        type="range" min="-500" max="500" 
-                        value={cardData.artOffsetY} name="artOffsetY"
-                        onChange={handleInputChange} 
-                        />
+                        <div style={{display:"flex", justifyContent:"space-between"}}>
+                            <input 
+                            type="range" min="-500" max="500"  
+                            value={cardData.artOffsetX} name="artOffsetX"
+                            onChange={handleInputChange}
+                            />
+                            <input 
+                            type="range" min="-500" max="500" 
+                            value={cardData.artOffsetY} name="artOffsetY"
+                            onChange={handleInputChange} 
+                            />
+                        </div>
                         <button onClick={(e) => {cardData.artOffsetX = 0; cardData.artOffsetY = 0; handleInputChange(e)}}>Reset</button>
                     </div>
                     {cardData.stage != "basic" 
@@ -143,12 +155,12 @@ function Form({cardData, handleInputChange, handleSetValue, handleAttackChange, 
             }/>
 
             <Collapsible header="⚡ Attacks" contents={
-                <fieldset>
+                <div className='form-card-attacks'>
                     {cardData.attacks.map((attack, index) => (
                         <AttackForm key={index} attack={attack} attackIndex={index} removeAttack={removeAttack} handleAttackChange={handleAttackChange} />
                     ))}
                     <button onClick={addAttack}>Add Attack</button>
-                </fieldset>
+                </div>
             }/>
 
             <Collapsible header="🛡️ Weakness" contents={

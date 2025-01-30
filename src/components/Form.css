@@ -15,8 +15,14 @@ fieldset {
 
 label {
     display: flex;
-    flex-direction: column;
+    /* flex-direction: column; */
     text-align: left;
+    justify-content: space-between;
+    width: 100%;
+
+    text-align: center;
+    /* vertical-align: bottom; */
+    align-items: center;
 }
 
 input, select, textarea {
@@ -104,14 +110,17 @@ input, select, textarea {
 }
 
 .attack-input-cost {
-    max-width: 64px;
+    max-width: 108px;
 }
 
 .attack-input-damage {
-    max-width: 32px;
+    max-width: 64px;
 }
 
 .attack-area-desc {
     flex-grow: 1;
+    max-width: 100%;
+    min-width: 100%;
+    height:fit-content;
 }
 

@@ -1,10 +1,10 @@
-.collapsible-body {
-    overflow: hidden;
-}
+.collapsible-body.active .collapsible-contents {
+    overflow: visible;
+} 
 
 .collapsible-contents {
     max-height: 0;
-    
+    overflow: hidden;
     transition: max-height 0.4s ease-out;
 }
 
