@@ -74,3 +74,11 @@
     font-weight: bold;
     src: url("assets/fonts/GillSansStd-BoldCondensed.otf") format("opentype");
 }
+
+
+
+@font-face {
+    font-family: "Essentiarum";
+    src: url("assets/fonts/Essentiarum Regular.ttf") format("truetype");
+}
+/* guide to use: https://www.pokemonaaah.net/news/2021/01/typefont/ */

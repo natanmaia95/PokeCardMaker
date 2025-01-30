@@ -39,7 +39,7 @@ function App() {
   const handleInputChange = function(e) {
     const { name, value } = e.target;
     let prevData = {...cardData, [name]:value};
-
+199
     if (name == "stage" || name == "element") {
       const newImageUrl = getImageBlankURL(prevData.element, prevData.stage);
       console.log(newImageUrl);
@@ -104,6 +104,7 @@ function App() {
 
   return (
     <div className="app-container">
+      <div id="background"/>
       <div className="form-container">
         <h1>Hello World!</h1>
         <p>pokemon card maker</p>

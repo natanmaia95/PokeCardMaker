@@ -1,7 +1,12 @@
 import React from "react";
 import './Form.css'
 import Collapsible from "./Collapsible";
-import { cardElementTypes, cardStageTypes } from "../dicts";
+import { cardElementTypes, cardStageTypes, elementTypeToAbbrev } from "../dicts";
+import EnergyCost from "./EnergyCost";
+
+function capitalize(string) {
+    return string[0].toUpperCase() + string.slice(1);
+}
 
 function AttackForm({attack, attackIndex, handleAttackChange, removeAttack}) {
 
@@ -46,91 +51,98 @@ function Form({cardData, handleInputChange, handleSetValue, handleAttackChange, 
     return (
         <div className="form-body">
 
-            <Collapsible header="Card Basics" contents={
-                <fieldset className='form-basics'>
-                    <label>Pokémon Type
+            <Collapsible header="📝 Card Basics" contents={
+                <div className='form-card-basics'>
+                    <div className='form-group'>
+                        {/* <label>Pokémon Type: <span style={{fontFamily:"Essentiarum", display:"inline"}}>{elementTypeToAbbrev[cardData.element]}</span></label> */}
+                        <label>Pokémon Type</label>
                         <select value={cardData.element} name="element" onChange={handleInputChange}>
-                            {cardElementTypes.map((elem) => (
-                                <option key={elem} value={elem}>{elem}</option>
-                            ))}
+                                {cardElementTypes.map((elem) => (
+                                    <option key={elem} value={elem}>
+                                        {capitalize(elem)}
+                                    </option>
+                                ))}
                         </select>
-                    </label>
-                    <label>Evolution Stage
+                    </div>
+                    <div className='form-group'>
+                        <label>Evolution Stage</label>
                         <select value={cardData.stage} name="stage" onChange={handleInputChange}>
-                            {cardStageTypes.map((stage) => (
-                                <option key={stage} value={stage}>{stage}</option>
-                            ))}
+                                {cardStageTypes.map((stage) => (
+                                    <option key={stage} value={stage}>{stage}</option>
+                                ))}
                         </select>
-                    </label>
-                </fieldset>
+                    </div>
+                </div>
             }/>
 
-            <Collapsible header="Header" contents={
-                <fieldset className='form-card-header'>
-                    <label>Name: 
+            <Collapsible header="💯 Header" contents={
+                <div className='form-card-header'>
+                    <div className='form-group'>
+                        <label>Name</label>
                         <input type="text" name="name"
-                        value={cardData.name}
-                        onChange={handleInputChange}
-                        />
-                    </label>
-                    <label>Subname 
+                            value={cardData.name}
+                            onChange={handleInputChange}
+                            />
+                    </div>
+                    <div className='form-group'>
+                        <label>Subname</label>
                         <input type="text" name="subname"
-                        value={cardData.subname}
-                        onChange={handleInputChange}
+                            value={cardData.subname}
+                            onChange={handleInputChange}
                         />
                         <button type="button"
                         onClick={() => {handleSetValue("isSubnamePrefix",!cardData.isSubnamePrefix)}}
                         >toggle prefix/subfix</button>
-                    </label>
-                    <label>HP: 
+                    </div>
+                    <div className='form-group'>
+                        <label>HP</label>
                         <input type="number" name="hp"
-                        value={cardData.hp}
-                        onChange={handleInputChange}
+                            value={cardData.hp}
+                            onChange={handleInputChange}
                         />
-                    </label>
+                    </div>
                     {cardData.stage != "basic" 
-                    ?   <label>Evolves from: 
-                            <input type="text" name="evolveFrom"
+                    ? <div className='form-group'>
+                        <label>Evolves from</label>
+                        <input type="text" name="evolveFrom"
                             value={cardData.evolveFrom}
                             onChange={handleInputChange}
-                            />
-                        </label>
-                    :   null}
-                </fieldset>
+                        /></div>
+                    : null}
+                </div>
             }/>
 
-            <Collapsible header="Card Art" contents={
-                <fieldset className="form-art">
-                    <label>Main Art
+            <Collapsible header="🖼️ Card Art" contents={
+                <div className='form-card-art'>
+                    <div className='form-group'>
+                        <label>Main Art</label>
                         <input type="file" accept="image/*" onChange={handleImageUpload}/>
-                    </label>
-                    
-                    <label>Main Art Offset: 
-                        <div>X
-                            <input 
-                            type="range" min="-500" max="500"  
-                            value={cardData.artOffsetX} name="artOffsetX"
-                            onChange={handleInputChange}
-                            />
-                        </div>
-                        <div>Y
-                            <input 
-                            type="range" min="-500" max="500" 
-                            value={cardData.artOffsetY} name="artOffsetY"
-                            onChange={handleInputChange} 
-                            />
-                        </div>
+                    </div>
+                    <div className='form-group'>
+                        <label>Main Art Offset (X, Y)</label>
+                        <input 
+                        type="range" min="-500" max="500"  
+                        value={cardData.artOffsetX} name="artOffsetX"
+                        onChange={handleInputChange}
+                        />
+                        <input 
+                        type="range" min="-500" max="500" 
+                        value={cardData.artOffsetY} name="artOffsetY"
+                        onChange={handleInputChange} 
+                        />
                         <button onClick={(e) => {cardData.artOffsetX = 0; cardData.artOffsetY = 0; handleInputChange(e)}}>Reset</button>
-                    </label>
-
-                    <label>Evolution
+                    </div>
+                    {cardData.stage != "basic" 
+                    ? <div className='form-group'>
+                        <label>Evolution</label>
                         <input type="file" accept="image/*" onChange={(e) => handleImageUpload(e, {isEvoArt:true})}/>
-                    </label>
-                </fieldset>
-
+                    </div>
+                    : null}
+                    
+                </div>
             }/>
 
-            <Collapsible header="Attacks" contents={
+            <Collapsible header="⚡ Attacks" contents={
                 <fieldset>
                     {cardData.attacks.map((attack, index) => (
                         <AttackForm key={index} attack={attack} attackIndex={index} removeAttack={removeAttack} handleAttackChange={handleAttackChange} />
@@ -139,84 +151,87 @@ function Form({cardData, handleInputChange, handleSetValue, handleAttackChange, 
                 </fieldset>
             }/>
 
-            <Collapsible header="Weakness" contents={
-                <fieldset>
-                    <label>Weakness
+            <Collapsible header="🛡️ Weakness" contents={
+                <div className='form-card-weakness'>
+                    <div className='form-group'>
+                        <label>Weakness</label>
                         <select value={cardData.weakness} name="weakness" onChange={handleInputChange}>
                             {[...cardElementTypes, 'empty'].map((elem) => (
-                                <option key={elem} value={elem}>{elem}</option>
+                                <option key={elem} value={elem}>{capitalize(elem)}</option>
                             ))}
                         </select>
-                    </label>
-
-                    <label>Resistance
+                    </div>
+                    <div className='form-group'>
+                        <label>Resistance</label>
                         <select value={cardData.resistance} name="resistance" onChange={handleInputChange}>
                             {[...cardElementTypes, 'empty'].map((elem) => (
-                                <option key={elem} value={elem}>{elem}</option>
+                                <option key={elem} value={elem}>{capitalize(elem)}</option>
                             ))}
                         </select>
-                    </label>
-
-                    <label>Retreat Cost: 
+                    </div>
+                    <div className='form-group'>
+                        <label>Retreat Cost</label>
                         <input type="number" name="retreatCost" min="0" max="5"
-                        value={cardData.retreatCost}
-                        onChange={handleInputChange}
+                            value={cardData.retreatCost}
+                            onChange={handleInputChange}
                         />
-                    </label>
-                </fieldset>
-            }/>
+                    </div>
 
-            <Collapsible header="Footer" contents={
-                <fieldset>
-                    <label>Lore
+                </div>
+
+            }/>
+            
+            <Collapsible header="🏷️ Footer" contents={
+                <div className='form-card-footer'>
+                    <div className='form-group'>
+                        <label>Lore</label>
                         <textarea name="dexDescription" type="text"
                             placeholder="The pokedéx entry goes here."
                             value={cardData.dexDescription}
                             onChange={handleInputChange}
                         />
-                    </label>
-
-                    <label>Artist
+                    </div>
+                    <div className='form-group'>
+                        <label>Illustrator</label>
                         <input name="artist" type="text"
                             placeholder="???"
                             value={cardData.artist}
                             onChange={handleInputChange}
                         />
-                    </label>
-
-                    <label>Regulation
+                    </div>
+                    <div className='form-group'>
+                        <label>Regulation</label>
                         <input name="reg" type="text"
                             placeholder="A"
                             value={cardData.reg}
                             onChange={handleInputChange}
                         />
-                    </label>
-
-                    <label>Set Name
+                    </div>
+                    <div className='form-group'>
+                        <label>Set Icon</label>
                         <input name="set" type="text"
                             placeholder="SV1"
                             value={cardData.set}
                             onChange={handleInputChange}
                         />
-                    </label>
-
-                    <label>Set Number
-                        <input name="collectorNumber" type="number"
-                            placeholder="1"
-                            value={cardData.collectorNumber}
-                            onChange={handleInputChange}
-                        />
-                        <input name="collectorNumberMax" type="number"
-                            placeholder="995"
-                            value={cardData.collectorNumberMax}
-                            onChange={handleInputChange}
-                        />
-                    </label>
-
-
-                </fieldset>
+                    </div>
+                    <div className='form-group'>
+                        <label>Set Number</label>
+                        <div style={{display:"flex", justifyContent:"space-between"}}>
+                            <input name="collectorNumber" type="number"
+                                placeholder="1"
+                                value={cardData.collectorNumber}
+                                onChange={handleInputChange}
+                            />
+                            <input name="collectorNumberMax" type="number"
+                                placeholder="995"
+                                value={cardData.collectorNumberMax}
+                                onChange={handleInputChange}
+                            />
+                        </div>
+                    </div>
+                </div>
             }/>
-            
             
         </div>
     );

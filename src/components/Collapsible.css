@@ -1,0 +1,28 @@
+.collapsible-body {
+    overflow: hidden;
+}
+
+.collapsible-contents {
+    max-height: 0;
+    
+    transition: max-height 0.4s ease-out;
+}
+
+.collapsible-body.active .collapsible-contents {
+    max-height: 1000px;
+}
+
+
+/* flip animation */
+
+#arrow-thingy {
+    /* position: relative; */
+    transition: transform 0.3s ease;
+    
+
+    user-select: none; /* Standard */
+}
+
+.collapsible-body.active .collapsible-button #arrow-thingy {
+    transform: rotate(180deg);
+}
