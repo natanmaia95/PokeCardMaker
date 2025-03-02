@@ -106,8 +106,8 @@ function App() {
     <div className="app-container">
       <div id="background"/>
       <div className="form-container">
-        <h1>Hello World!</h1>
-        <p>pokemon card maker</p>
+        <h1>Poké Card Crafter</h1>
+        <p>Make your own custom pokémon cards!</p>
         <Form 
         cardData={cardData} handleImageUpload={handleImageUpload} handleSetValue={handleSetValue}
         handleInputChange={handleInputChange} handleAttackChange={handleAttackChange}
