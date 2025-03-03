@@ -79,16 +79,27 @@ function Card({ style, name, subname, isSubnamePrefix, element, stage, blankUrl,
 
             <div className='card-body'>
                 {attacks.map((attack, index) => (
-                    <div className='attack-container' key={index}>
-                        <div className='attack-header'>
-                            <div className='attack-cost'>
-                                <EnergyCost cost={attack['cost']}/>
+                    attack['type'] == 'attack' 
+
+                    ?   <div className='attack-container' key={index}>
+                            <div className='attack-header'>
+                                <div className='attack-cost'>
+                                    <EnergyCost cost={attack['cost']}/>
+                                </div>
+                                <div className='attack-name'>{attack['name']}</div>
+                                <div className='attack-damage'>{attack['damage']}</div>
                             </div>
-                            <div className='attack-name'>{attack['name']}</div>
-                            <div className='attack-damage'>{attack['damage']}</div>
+                            <ReactMarkdown className='attack-desc'>{attack['description']}</ReactMarkdown>
                         </div>
-                        <ReactMarkdown className='attack-desc'>{attack['description']}</ReactMarkdown>
-                    </div>
+
+                    :   <div className='attack-container' key={index}>
+                            <div className='attack-header'>
+                                <img className='ability-sprite' src='assets/sprites/ability_sv.png' />
+                                <div className='ability-name'>{attack['name']}</div>
+                                {/* <div className='attack-damage'>{attack['damage']}</div> */}
+                            </div>
+                            <ReactMarkdown className='attack-desc'>{attack['description']}</ReactMarkdown>
+                        </div>
                 ))}
 
             </div>

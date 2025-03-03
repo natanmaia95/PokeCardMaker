@@ -98,6 +98,12 @@
     padding-bottom: 6px;
 }
 
+.card-name-subname.empty {
+    width: 0px;
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
 .card-evoname {
     position: absolute;
     top: 9.15%;
@@ -152,8 +158,8 @@
     position: absolute;
     top: 100px;
     left: 58px;
-    width: 617px;
-    height: 384px;
+    width: 622px;
+    height: 388px;
 
     display: flex;
     justify-content: center;
@@ -193,7 +199,7 @@
 
 .card-body {
     position: absolute;
-    top: 52%;
+    top: 50%;
     /* bottom: 80%; */
 
     width: 100%;
@@ -260,6 +266,20 @@
 
 .attack-desc p {
     margin: 0;
+    line-height: 22pt;
+}
+
+.ability-sprite {
+    padding-right: 8px;
+    padding-top: 4px;
+}
+
+.ability-name {
+    text-align: left;
+    font-weight: bold;
+    font-size: var(--text-size-header);
+    color: #D71820;
+    font-family: "Gill Sans Condensed";
 }
 
 

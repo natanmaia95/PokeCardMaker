@@ -10,10 +10,10 @@ function capitalize(string) {
 }
 
 function AttackForm({attack, attackIndex, handleAttackChange, removeAttack}) {
-
+    // attack['type'] == 'attack';
     return (<div className='form-attack'>
         <div className='form-group'>
-            <label>Name</label>
+            <label>Attack Name</label>
             <input type="text" name="name"
             value={attack.name}
             onChange={(e) =>handleAttackChange(attackIndex, 'name', e.target.value)}
@@ -38,6 +38,30 @@ function AttackForm({attack, attackIndex, handleAttackChange, removeAttack}) {
                 onChange={(e) =>handleAttackChange(attackIndex, 'damage', e.target.value)}
                 />
             </label>
+        </div>
+
+        <div className='form-group'>
+            {/* <label>Description</label> */}
+            <textarea type="text" name="description" className='attack-area-desc'
+            value={attack.description} placeholder="Add a description"
+            onChange={(e) =>handleAttackChange(attackIndex, 'description', e.target.value)}
+            />
+        </div>
+
+        <button onClick={(e) => removeAttack(attackIndex)}>Delete</button>
+    </div>);
+}
+
+
+function AbilityForm({attack, attackIndex, handleAttackChange, removeAttack}) {
+    // attack['type'] == 'ability';
+    return (<div className='form-attack'>
+        <div className='form-group'>
+            <label>Ability Name</label>
+            <input type="text" name="name"
+            value={attack.name}
+            onChange={(e) =>handleAttackChange(attackIndex, 'name', e.target.value)}
+            />
         </div>
 
         <div className='form-group'>
@@ -156,10 +180,15 @@ function Form({cardData, handleInputChange, handleSetValue, handleAttackChange, 
 
             <Collapsible header="⚡ Attacks" contents={
                 <div className='form-card-attacks'>
+                    <button onClick={() => addAttack("attack")}>Add Attack</button>
+                    <button onClick={() => addAttack("ability")}>Add Ability</button>
+                    
                     {cardData.attacks.map((attack, index) => (
-                        <AttackForm key={index} attack={attack} attackIndex={index} removeAttack={removeAttack} handleAttackChange={handleAttackChange} />
+                        attack['type'] == 'attack'
+                        ? <AttackForm key={index} attack={attack} attackIndex={index} removeAttack={removeAttack} handleAttackChange={handleAttackChange} />
+                        : <AbilityForm key={index} attack={attack} attackIndex={index} removeAttack={removeAttack} handleAttackChange={handleAttackChange} />
                     ))}
-                    <button onClick={addAttack}>Add Attack</button>
+                    
                 </div>
             }/>
 
