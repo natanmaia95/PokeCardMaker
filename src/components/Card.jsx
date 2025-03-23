@@ -7,7 +7,8 @@ import '../fonts.css'
 import { elementTypeToAbbrev, getImageBlankURL } from '../dicts';
 
 function Card({ style, name, subname, isSubnamePrefix, element, stage, blankUrl, hp, evolveFrom, evoArt, art, evolveArt, artOffsetX, artOffsetY, 
-    abilities, attacks, weakness, resistance, retreatCost, dexDescription, artist, collectorNumber, collectorNumberMax, reg, set,
+    dexNumber, dexCategory, dexHeight, dexWeight, dexDescription, artist, collectorNumber, collectorNumberMax, reg, set,
+    abilities, attacks, weakness, resistance, retreatCost,
     meta_scale}) {
 
     const [cardMouseX, setCardMouseX] = useState(0);
@@ -51,9 +52,9 @@ function Card({ style, name, subname, isSubnamePrefix, element, stage, blankUrl,
             <div className='card-header'>
                 
                 <div className='card-name'>
-                {!(subname != undefined && isSubnamePrefix == true) ? null : <p className='card-name-subname'>{subname} </p>}
+                {!(subname != "" && isSubnamePrefix == true) ? null : <p className='card-name-subname'>{subname} </p>}
                 {name}
-                {!(subname != undefined && isSubnamePrefix == false) ? null : <p className='card-name-subname'> {subname}</p>}
+                {!(subname != "" && isSubnamePrefix == false) ? null : <p className='card-name-subname'> {subname}</p>}
                 </div>
                 
                 
@@ -61,7 +62,7 @@ function Card({ style, name, subname, isSubnamePrefix, element, stage, blankUrl,
                     <div className='card-hp-hp'>HP </div>{hp}
                 </div>
                 {stage == "basic" ? null : <p className='card-evoname'>Evolves from {evolveFrom}</p>}
-                {stage == "basic" ? null : <img className='evolveArt-image' src={evoArt}/>}
+                {stage == "basic" ? null : <img className='evolveArt-image' src={evoArt} alt=" "/>}
                 
             </div>
 
@@ -71,10 +72,14 @@ function Card({ style, name, subname, isSubnamePrefix, element, stage, blankUrl,
                     ? <div className="art-image" 
                     style={{backgroundPosition: `${artOffsetX}px ${artOffsetY}px`, backgroundImage: `url(${art})`}}/> 
                     
-                    : <div id='no-art'>No art.</div>
+                    : <div id='no-art' alt=" "><p>No art.</p></div>
                 }
                 {/* <div id='shadow'/> */}
                 {/* TODO: fix shadow bug using an image */}
+            </div>
+
+            <div className='card-dex-data'>
+                <p>{`NO. ${dexNumber.toString().padStart(4, '0')}   ${dexCategory} Pokémon   HT: ${dexHeight}  WT: ${dexWeight}`}</p>
             </div>
 
             <div className='card-body'>

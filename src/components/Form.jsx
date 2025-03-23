@@ -14,10 +14,13 @@ function AttackForm({attack, attackIndex, handleAttackChange, removeAttack}) {
     return (<div className='form-attack'>
         <div className='form-group'>
             <label>Attack Name</label>
-            <input type="text" name="name"
-            value={attack.name}
-            onChange={(e) =>handleAttackChange(attackIndex, 'name', e.target.value)}
-            />
+            <div style={{display:"flex", justifyContent:"space-between"}}>
+                <input type="text" name="name"
+                value={attack.name}
+                onChange={(e) =>handleAttackChange(attackIndex, 'name', e.target.value)}
+                />
+                <button onClick={(e) => removeAttack(attackIndex)}>Delete</button>
+            </div>
         </div>
             
         <div style={{display:"flex", justifyContent:"space-between"}}>
@@ -47,8 +50,6 @@ function AttackForm({attack, attackIndex, handleAttackChange, removeAttack}) {
             onChange={(e) =>handleAttackChange(attackIndex, 'description', e.target.value)}
             />
         </div>
-
-        <button onClick={(e) => removeAttack(attackIndex)}>Delete</button>
     </div>);
 }
 
@@ -58,10 +59,14 @@ function AbilityForm({attack, attackIndex, handleAttackChange, removeAttack}) {
     return (<div className='form-attack'>
         <div className='form-group'>
             <label>Ability Name</label>
-            <input type="text" name="name"
-            value={attack.name}
-            onChange={(e) =>handleAttackChange(attackIndex, 'name', e.target.value)}
-            />
+            <div style={{display:"flex"}}>
+                <input type="text" name="name"
+                value={attack.name}
+                onChange={(e) =>handleAttackChange(attackIndex, 'name', e.target.value)}
+                />
+                <button onClick={(e) => removeAttack(attackIndex)}>Delete</button>
+            </div>
+            
         </div>
 
         <div className='form-group'>
@@ -71,8 +76,6 @@ function AbilityForm({attack, attackIndex, handleAttackChange, removeAttack}) {
             onChange={(e) =>handleAttackChange(attackIndex, 'description', e.target.value)}
             />
         </div>
-
-        <button onClick={(e) => removeAttack(attackIndex)}>Delete</button>
     </div>);
 }
 
@@ -120,13 +123,15 @@ function Form({cardData, handleInputChange, handleSetValue, handleAttackChange, 
                         <label>Subname 
                             <InfoIcon helpText='Use this to make composite names like "Hisuian Arcanine" or "Hop&quot;s Snorlax".'/>
                         </label>
-                        <input type="text" name="subname"
-                            value={cardData.subname}
-                            onChange={handleInputChange}
-                        />
-                        <button type="button"
-                        onClick={() => {handleSetValue("isSubnamePrefix",!cardData.isSubnamePrefix)}}
-                        >toggle prefix/subfix</button>
+                        <div style={{display:"flex", justifyContent:"space-between"}}>
+                            <input type="text" name="subname" style={{flex:1.0}}
+                                value={cardData.subname}
+                                onChange={handleInputChange}
+                            />
+                            <button type="button" style={{flex:1.0}}
+                            onClick={() => {handleSetValue("isSubnamePrefix",!cardData.isSubnamePrefix)}}
+                            >Toggle prefix / subfix</button>
+                        </div>
                     </div>
                     <div className='form-group'>
                         <label>HP</label>
@@ -221,9 +226,41 @@ function Form({cardData, handleInputChange, handleSetValue, handleAttackChange, 
                 </div>
 
             }/>
-            
-            <Collapsible header="🏷️ Footer" contents={
-                <div className='form-card-footer'>
+
+            <Collapsible header="📱 Dex Data" contents={
+                <div className='form-dex-data'>
+                    <div className='form-group'>
+                        <label>Dex Number</label>
+                        <input name="dexNumber" type="number"
+                            placeholder="0030"
+                            value={cardData.dexNumber}
+                            onChange={handleInputChange}
+                        />
+                    </div>
+                    <div className='form-group'>
+                        <label>Category</label>
+                        <textarea name="dexCategory" type="text"
+                            placeholder="displays '[Category] Pokémon'."
+                            value={cardData.dexCategory}
+                            onChange={handleInputChange}
+                        />
+                    </div>
+                    <div className='form-group'>
+                        <label>Height</label>
+                        <textarea name="dexHeight" type="text"
+                            placeholder={"2'"+'5"'}
+                            value={cardData.dexHeight}
+                            onChange={handleInputChange}
+                        />
+                    </div>
+                    <div className='form-group'>
+                        <label>Weight</label>
+                        <textarea name="dexWeight" type="text"
+                            placeholder="200 lbs."
+                            value={cardData.dexWeight}
+                            onChange={handleInputChange}
+                        />
+                    </div>
                     <div className='form-group'>
                         <label>Lore</label>
                         <textarea name="dexDescription" type="text"
@@ -232,6 +269,11 @@ function Form({cardData, handleInputChange, handleSetValue, handleAttackChange, 
                             onChange={handleInputChange}
                         />
                     </div>
+                </div>
+            }/>
+            
+            <Collapsible header="🏷️ Footer" contents={
+                <div className='form-card-footer'>
                     <div className='form-group'>
                         <label>Illustrator</label>
                         <input name="artist" type="text"

@@ -152,6 +152,8 @@
     left: 30px;
 
     object-fit: contain;
+
+    image-rendering: smooth;
 }
 
 .card-art {
@@ -165,6 +167,8 @@
     justify-content: center;
     align-items: center;
     overflow: hidden; /* Ensures the image stays within the container */
+
+    image-rendering: smooth;
 
     z-index: -1;
 }
@@ -192,9 +196,36 @@
 .card-art > #no-art {
     width: 100%;
     height: 100%;
-    background-color: pink;
-    color: darkblue;
-    display: block;
+    background-color: darkcyan;
+    color: white;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Gill Sans';
+    font-size: 30px;
+}
+
+#no-art > p {
+    position: relative;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
+
+.card-dex-data {
+    position: absolute;
+    top: 46.5%;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    /* font-weight: bold; */
+    /* font-style: italic; */
+    font-family: "Futura Book";
+    /* font-size: 1em; Relative to the .card font size */
+    font-size: 15px;
+    /* color: var(--text-color-black); */
+    color: black;
+    white-space: break-spaces;
 }
 
 .card-body {

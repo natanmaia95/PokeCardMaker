@@ -24,12 +24,18 @@ function App() {
     abilities: [],
     attacks: [
       { type: "attack", name: "Quick Attack", cost: "C", damage:"10" },
-      { type: "attack", name: "Thunder Shock", cost: "PP", damage:"20+",
+      { type: "attack", name: "Thunder Shock", cost: "LL", damage:"20+",
         description:"Flip a coin. If heads, this attack deals 20 more damage and the Defending Pokémon is now Paralyzed." },
     ],
     retreatCost: 1,
     weakness: 'fighting',
     resistance: 'empty',
+
+    dexNumber: 30,
+    dexCategory: 'Placeholder',
+    dexHeight: '2\'5"',
+    dexWeight: '200 lbs.',
+    // dexDescription: 'Lore goes here.',
 
     reg: 'A', set: 'SV1',
     collectorNumber: 1, collectorNumberMax:995,
