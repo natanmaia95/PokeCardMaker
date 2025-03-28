@@ -9,6 +9,7 @@ function App() {
 
   const defaultViewScale = 0.5;
   const [cardScale, setCardScale] = useState(defaultViewScale);
+  const [disableRotation, setDisableRotation] = useState(false);
 
   const [cardData, setCardData] = useState({
     name:"Pikachu",
@@ -40,7 +41,6 @@ function App() {
     reg: 'A', set: 'SV1',
     collectorNumber: 1, collectorNumberMax:995,
   });
-
 
   const handleInputChange = function(e) {
     const { name, value } = e.target;
@@ -119,25 +119,44 @@ function App() {
       <div id="background"/>
       <div className="form-container">
         <h1>Poké Card Crafter</h1>
-        <p>Make your own custom pokémon cards!</p>
+        <p>Make your own custom cards!</p>
         <Form 
         cardData={cardData} handleImageUpload={handleImageUpload} handleSetValue={handleSetValue}
         handleInputChange={handleInputChange} handleAttackChange={handleAttackChange}
         addAttack={addAttack} removeAttack={removeAttack}
         />
 
-        <button className="btn-export" onClick={exportAsImage}>Export</button>
+        <button className="btn-export" onClick={exportAsImage}>Export as .png</button>
       </div>
       
       <div className="card-container">
-        <Card {...cardData} meta_scale={cardScale} style={{top:'-30%'}}/>
+        <Card {...cardData} meta_scale={cardScale} meta_disableRotation={disableRotation} style={{top:'-30%'}}/>
         
       </div>
       
+      <footer className="footer">
+
+
+        <p>Made by Natan Maia</p>
+
+        <p>
+          Check out my other projects:  
+          <a href="https://github.com/natanmaia95" target="_blank">GitHub</a>
+          |
+          <a href="https://nate-the-bard.itch.io/" target="_blank">Games</a>
+          |
+          <a href="https://natanmaia95.github.io/" target="_blank">Portfolio</a>
+        </p>
+
+        <button className="btn-config-rotation" onClick={() => setDisableRotation(!disableRotation)}>
+          {disableRotation ? "Enable Card Rotation" : "Disable Card Rotation"}
+        </button>
+
+      </footer>
+
+      
+
     </div>
-
-
-
   );
 }
 

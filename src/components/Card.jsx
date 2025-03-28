@@ -9,7 +9,7 @@ import { elementTypeToAbbrev, getImageBlankURL } from '../dicts';
 function Card({ style, name, subname, isSubnamePrefix, element, stage, blankUrl, hp, evolveFrom, evoArt, art, evolveArt, artOffsetX, artOffsetY, 
     dexNumber, dexCategory, dexHeight, dexWeight, dexDescription, artist, collectorNumber, collectorNumberMax, reg, set,
     abilities, attacks, weakness, resistance, retreatCost,
-    meta_scale}) {
+    meta_scale, meta_disableRotation}) {
 
     const [cardMouseX, setCardMouseX] = useState(0);
     const [cardMouseY, setCardMouseY] = useState(0);
@@ -29,17 +29,19 @@ function Card({ style, name, subname, isSubnamePrefix, element, stage, blankUrl,
     };
 
     const mouseMoveHandler = function(event) {
-        //currentTarget is the event owner, target is the actual div the mouse is on
-        const rect = event.currentTarget.getBoundingClientRect();
+        if (!meta_disableRotation) {
+            //currentTarget is the event owner, target is the actual div the mouse is on
+            const rect = event.currentTarget.getBoundingClientRect();
 
-        const mouseX = event.clientX - rect.left;
-        const mouseY = event.clientY - rect.top;
+            const mouseX = event.clientX - rect.left;
+            const mouseY = event.clientY - rect.top;
 
-        const relativeX = (mouseX - rect.width/2) / rect.width;
-        const relativeY = (mouseY - rect.height/2) / rect.height;
+            const relativeX = (mouseX - rect.width/2) / rect.width;
+            const relativeY = (mouseY - rect.height/2) / rect.height;
 
-        setCardMouseX(relativeX);
-        setCardMouseY(relativeY);
+            setCardMouseX(relativeX);
+            setCardMouseY(relativeY);
+        }
     };
 
     return (
