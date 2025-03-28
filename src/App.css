@@ -18,7 +18,7 @@
   top: -50%;
   left: -50%;
   z-index: -100;
-  background: url("./assets/backgrounds/bg_energy_icons_color.png") 0 0 repeat;
+  background: url("assets/backgrounds/bg_energy_icons_color.png") 0 0 repeat;
   background-size: 256px;
   transform: rotate(30deg);
   background-color: #fffae8;
